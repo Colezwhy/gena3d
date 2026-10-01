@@ -1,387 +1,939 @@
 <!DOCTYPE html>
-<html>
-
+<html lang="en">
 <head>
-    <!-- Google tag (gtag.js) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XB3PR2Y1TQ"></script>
-    <script>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-XB3PR2Y1TQ"></script>
+  <script>
     window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments);}
     gtag('js', new Date());
-
     gtag('config', 'G-XB3PR2Y1TQ');
-    </script>
+  </script>
 
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
-    <title>GENA3D: Generative Amodal 3D Modeling by Bridging 2D Priors and 3D Coherence</title>
-    
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.0/css/bootstrap.min.css">
-    <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,500,600' rel='stylesheet' type='text/css'>
-    <link rel="stylesheet" href="assets/css/Highlight-Clean.css">
-    <link rel="stylesheet" href="assets/css/styles.css">
-    <link rel="icon" href="./sources/1_icon.png">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>GENA3D: Generative Amodal 3D Modeling by Bridging 2D Priors and 3D Coherence</title>
+  <meta name="description" content="GENA3D (ECCV 2026) generates complete 3D objects from sparse, partially occluded views by combining 2D amodal completion priors with View-Wise and Stereo-Conditioned Cross Attention for 3D coherence.">
+  <meta name="theme-color" content="#f1f2f4">
+  <link rel="canonical" href="https://colezwhy.github.io/gena3d/">
 
+  <meta property="og:site_name" content="GENA3D">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="GENA3D: Generative Amodal 3D Modeling by Bridging 2D Priors and 3D Coherence">
+  <meta property="og:description" content="ECCV 2026. Complete, coherent 3D objects from sparse and partially occluded views.">
+  <meta property="og:url" content="https://colezwhy.github.io/gena3d/">
+  <meta property="og:image" content="https://colezwhy.github.io/gena3d/static/img/og.jpg">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="GENA3D (ECCV 2026)">
+  <meta name="twitter:image" content="https://colezwhy.github.io/gena3d/static/img/og.jpg">
 
-    <meta property="og:site_name" content="GENA3D />
-    <meta property="og:type" content="video.other" />
-    <meta property="og:title" content="GENA3D: Generative Amodal 3D Modeling by Bridging 2D Priors and 3D Coherence" />
-    <meta property="og:description" content="GENA3D: Generative Amodal 3D Modeling by Bridging 2D Priors and 3D Coherence, 2025" />
-    <meta property="og:url" content="" />
+  <link rel="icon" type="image/png" href="static/img/favicon.png">
+  <link rel="apple-touch-icon" href="static/img/apple-touch-icon.png">
 
-    <script src="assets/js/video_comparison.js"></script>
-    <script type="module" src="https://unpkg.com/@google/model-viewer@2.0.1/dist/model-viewer.min.js"></script>
-
-    <style>
-        body, p, h1, h2, h3, h4, h5, h6, span, a, div {
-            font-family: "Times New Roman", Times, serif !important;
-        }
-    </style>
-
-
-    <style>
-        .image-container {
-          display: flex;
-          justify-content: space-between;
-        }
-        .image-container img {
-          width: 70%; /* 每张图片宽度设置为50% */
-        }
-      </style>
-
-    <style>
-        p {
-            font-size: 18px;
-        }
-    </style>
-
-<style>
-    .red-glass-btn {
-        font-size: 28px;
-        padding: 12px 28px;
-        border-radius: 18px;
-    
-        background: rgba(255, 80, 80, 0.25);
-        backdrop-filter: blur(12px);
-        border: 1px solid rgba(255, 80, 80, 0.4);
-    
-        color: rgb(180, 30, 30);
-        font-weight: 500;
-    
-        display: inline-flex;
-        align-items: center;
-        gap: 8px;
-    
-        transition: 0.25s ease;
-    }
-    
-    .red-glass-btn:hover {
-        background: rgba(255, 80, 80, 0.35);
-        border-color: rgba(255, 80, 80, 0.6);
-        transform: translateY(-2px);
-    }
-    
-    .red-glass-btn svg {
-        width: 24px;
-        height: 24px;
-        fill: currentColor;
-    }
-    </style>
-    
-
-
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Hanken+Grotesk:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Unbounded:wght@600;700;800&display=swap">
+  <link rel="stylesheet" href="static/css/style.css?v=ff90cc33">
 </head>
 
-
 <body>
+<a class="skip-link" href="#overview">Skip to content</a>
 
-    <div class="highlight-clean" style="padding-bottom: 10px;">
-        <div class="container" style="max-width: 1000px; margin-bottom: 40px;">
-            <h1 class="text-center " style="color: #a30b4d;"><b>GENA3D: Generative Amodal 3D Modeling by Bridging 2D Priors and 3D Coherence</b></h1>
-        </div>
-        <!-- <div class="container" style="max-width: 1400px; margin-bottom: 30px;">
-            <h1 class="text-center"><b> ICLR 2025
-        </div> -->
-
-        <div class="container" style="max-width: 1000px; margin-bottom: 30px;">
-            <div class="row authors">
-                <div class="col">
-                    <!-- <h5 class="text-center" style="text-align: center">Authors anonymized</h5> -->
-                    <div class="text-center">
-                            <span class="author-block" style="font-size: 35px;  margin-right: 35px;">
-                            <a href="https://colezwhy.github.io/">Junwei Zhou</a></span>
-                            <span class="author-block" style="font-size: 35px;  margin-right: 35px;">
-                            <a href="https://yuwingtai.github.io/"> Yu-Wing Tai </a></span>
-                    </div>
-            
-                      <div class="text-center">
-                        <span class="author-block" style="font-size: 28px; margin-right: 30px;">Dartmouth College</span>
-                      </div>
-                </div>
-            </div>
-            <div class="buttons" style="margin-top: 8px; margin-bottom: 8px;">
-                <a class="red-glass-btn" href="https://arxiv.org/abs/2511.21945">
-                    <svg style="width:24px;height:24px;margin-left:-12px;margin-right:12px" viewBox="0 0 24 24">
-                        <path fill="currentColor" d="M16 0H8C6.9 0 6 .9 6 2V18C6 19.1 6.9 20 8 20H20C21.1 20 22 19.1 22 18V6L16 0M20 18H8V2H15V7H20V18M4 4V22H20V24H4C2.9 24 2 23.1 2 22V4H4M10 10V12H18V10H10M10 14V16H15V14H10Z"></path>
-                    </svg> 
-                    Paper
-                </a>
-                <a class="red-glass-btn" href="https://github.com/Colezwhy/GENAmodal3D">
-                    <svg xmlns="http://www.w3.org/2000/svg" style="width:24px;height:24px;margin-left:-12px;margin-right:12px" viewBox="0 0 24 24">
-                        <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 
-                                1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 
-                                3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 
-                                2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"></path>
-                    </svg>
-                    Code
-                </a>
-            </div>
+<header class="topbar">
+  <div class="wrap topbar-inner">
+    <a class="brand" href="#top" aria-label="GENA3D, back to top"><span class="brand-mark" aria-hidden="true"></span>GENA3D</a>
+    <nav class="nav" aria-label="Sections">
+      <a href="#overview">Overview</a>
+      <a href="#method">Method</a>
+      <a href="#results">Results</a>
+      <a href="#gallery">360° gallery</a>
+      <a href="#more">More results</a>
+      <a href="#ablations">Ablations</a>
+      <a href="#bibtex">BibTeX</a>
+    </nav>
+    <div class="topbar-cta">
+      <a class="btn btn--sm" href="https://arxiv.org/abs/2511.21945" aria-label="Paper on arXiv">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5M9 13h6M9 17h4"/></svg>
+        <span>Paper</span>
+      </a>
+      <a class="btn btn--sm" href="https://github.com/Colezwhy/GENAmodal3D" aria-label="Code on GitHub">
+        <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 .5a11.5 11.5 0 0 0-3.64 22.41c.58.1.79-.25.79-.56v-2c-3.2.7-3.88-1.36-3.88-1.36-.52-1.33-1.28-1.69-1.28-1.69-1.05-.71.08-.7.08-.7 1.16.08 1.77 1.19 1.77 1.19 1.03 1.76 2.7 1.25 3.36.96.1-.75.4-1.25.73-1.54-2.56-.29-5.25-1.28-5.25-5.69 0-1.26.45-2.29 1.19-3.1-.12-.29-.52-1.46.11-3.05 0 0 .97-.31 3.17 1.18a11 11 0 0 1 5.77 0c2.2-1.49 3.17-1.18 3.17-1.18.63 1.59.23 2.76.11 3.05.74.81 1.19 1.84 1.19 3.1 0 4.42-2.7 5.39-5.27 5.68.41.36.78 1.06.78 2.14v3.17c0 .31.21.67.8.56A11.5 11.5 0 0 0 12 .5z"/></svg>
+        <span>Code</span>
+      </a>
     </div>
+  </div>
+  <div class="progress" aria-hidden="true"></div>
+</header>
 
-    <hr class="divider" />
-    <div class="container" style="max-width: 1200px;">
-        <div class="row">
-            <div class="col-md-12">
-                <div class="container" style="max-width: 1200px;">
-                    <div class="row">
-                        <div class="col-md-12">
-                        <img src="sources/teaser.png" alt="architecture" style="width: 70%; display: block; margin: 0 auto;">
-                        </div>
+<main id="top">
 
-                        <div class="col-12">
-                            <h2> What do we do? </h2>
-                            <div class="video-compare-container" style="width: 100%">
-                                <video class="video lazy" loop playsinline autoplay muted style="width: 100%">
-                                    <source data-src="videos/demonstration.mp4" type="video/mp4"></source>
-                                </video>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+  <!-- ═════════════ HERO ═════════════ -->
+  <section class="hero">
+    <div class="wrap hero-grid">
+      <div>
+        <ul class="badges">
+          <li class="badge badge--venue"><i aria-hidden="true"></i>ECCV 2026</li>
+          <li class="badge">arXiv 2511.21945</li>
+        </ul>
+        <h1 class="wordmark" aria-label="GENA3D">
+          <span aria-hidden="true">GENA<span class="wm-3d">3D</span></span>
+          <span class="wm-occluder" aria-hidden="true"><span>occluded</span></span>
+        </h1>
+        <p class="subtitle"><b>Gen</b>erative <b>A</b>modal <b>3D</b> Modeling by Bridging 2D Priors and 3D Coherence</p>
+        <ul class="authors">
+          <li><a href="https://colezwhy.github.io/">Junwei Zhou</a></li>
+          <li><a href="https://yuwingtai.github.io/">Yu-Wing Tai</a></li>
+        </ul>
+        <p class="affil">Dartmouth College</p>
+        <div class="cta">
+          <a class="btn btn--primary" href="https://arxiv.org/abs/2511.21945">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5M9 13h6M9 17h4"/></svg>
+            arXiv
+          </a>
+          <a class="btn" href="https://arxiv.org/pdf/2511.21945">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v12m0 0-4-4m4 4 4-4M5 21h14"/></svg>
+            PDF
+          </a>
+          <a class="btn" href="https://github.com/Colezwhy/GENAmodal3D">
+            <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 .5a11.5 11.5 0 0 0-3.64 22.41c.58.1.79-.25.79-.56v-2c-3.2.7-3.88-1.36-3.88-1.36-.52-1.33-1.28-1.69-1.28-1.69-1.05-.71.08-.7.08-.7 1.16.08 1.77 1.19 1.77 1.19 1.03 1.76 2.7 1.25 3.36.96.1-.75.4-1.25.73-1.54-2.56-.29-5.25-1.28-5.25-5.69 0-1.26.45-2.29 1.19-3.1-.12-.29-.52-1.46.11-3.05 0 0 .97-.31 3.17 1.18a11 11 0 0 1 5.77 0c2.2-1.49 3.17-1.18 3.17-1.18.63 1.59.23 2.76.11 3.05.74.81 1.19 1.84 1.19 3.1 0 4.42-2.7 5.39-5.27 5.68.41.36.78 1.06.78 2.14v3.17c0 .31.21.67.8.56A11.5 11.5 0 0 0 12 .5z"/></svg>
+            Code
+          </a>
+          <a class="btn" href="#bibtex">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 4H6a2 2 0 0 0-2 2v4a2 2 0 0 0 2 2h2v-2M18 4h-2a2 2 0 0 0-2 2v4a2 2 0 0 0 2 2h2v-2M6 12v3a5 5 0 0 1-2 4M16 12v3a5 5 0 0 1-2 4"/></svg>
+            BibTeX
+          </a>
         </div>
+      </div>
+
+      <figure class="viewer" aria-label="Generated 3D objects: texture and surface normals">
+        <div class="vw-stage" id="vw-stage">
+          <canvas id="vw-canvas" width="512" height="512" aria-hidden="true"></canvas>
+          <video class="vw-src" id="vw-video" muted loop playsinline preload="auto" aria-hidden="true"></video>
+          <span class="vw-label vw-label--l">Texture</span>
+          <span class="vw-label vw-label--r">Geometry</span>
+          <div class="vw-line" id="vw-line"></div>
+          <div class="vw-knob" id="vw-knob" role="slider" tabindex="0" aria-label="Split between texture and surface normals" aria-valuemin="0" aria-valuemax="100" aria-valuenow="50" aria-valuetext="50% texture">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 6-6 6 6 6M15 6l6 6-6 6"/></svg>
+          </div>
+          <span class="vw-hint">drag the line</span>
+          <div class="vw-input" id="vw-input">
+            <span class="vw-input-k">Input · <b id="vw-views">4 views</b></span>
+            <div class="vw-thumbs" id="vw-thumbs"></div>
+          </div>
+        </div>
+        <div class="vw-picker" role="group" aria-label="Choose an object" id="vw-picker">
+          <button class="vw-chip" type="button" data-slug="gso-mario" data-kind="obj" data-inputs="static/img/inputs/in-a3d79f86a6.webp,static/img/inputs/in-2cbd5edd64.webp,static/img/inputs/in-6704f3ae67.webp,static/img/inputs/in-4a09663f4d.webp" aria-pressed="true"><img src="static/img/thumbs/gso-mario.webp" alt="" width="30" height="30">Mario</button>
+          <button class="vw-chip" type="button" data-slug="gso-pony" data-kind="obj" data-inputs="static/img/inputs/in-90dfd71f11.webp,static/img/inputs/in-233362782e.webp" aria-pressed="false"><img src="static/img/thumbs/gso-pony.webp" alt="" width="30" height="30">Pony</button>
+          <button class="vw-chip" type="button" data-slug="scene-rocking-chair" data-kind="photo" data-inputs="static/img/inputs/in-e08e0474ef.webp" aria-pressed="false"><img src="static/img/thumbs/scene-rocking-chair.webp" alt="" width="30" height="30">Rocking chair</button>
+          <button class="vw-chip" type="button" data-slug="wild-suv" data-kind="photo" data-inputs="static/img/inputs/in-51dbf5324a.webp" aria-pressed="false"><img src="static/img/thumbs/wild-suv.webp" alt="" width="30" height="30">SUV</button>
+          <button class="vw-chip" type="button" data-slug="wild-teddy" data-kind="photo" data-inputs="static/img/inputs/in-53727c41ea.webp" aria-pressed="false"><img src="static/img/thumbs/wild-teddy.webp" alt="" width="30" height="30">Teddy bear</button>
+          <button class="vw-chip" type="button" data-slug="gso-horse" data-kind="obj" data-inputs="static/img/inputs/in-6b728fd454.webp,static/img/inputs/in-3855cc67e0.webp" aria-pressed="false"><img src="static/img/thumbs/gso-horse.webp" alt="" width="30" height="30">Horse</button>
+        </div>
+        <figcaption class="vw-caption">Bottom left: the occluded input views. The rest is generated by GENA3D. Left of the line is the textured render, right of it the surface normals of the same frame.</figcaption>
+      </figure>
     </div>
+  </section>
 
-    <hr class="divider" />
-
-    <div class="container" style="max-width: 1200px;">
-        <div class="row">
-            <div class="col-md-12">
-                <h2>Abstract</h2>
-                <p>
-                    Generating complete 3D objects under partial occlusions (i.e., amodal scenarios) is a practically important yet challenging problem, as large portions of object geometry are unobserved in real-world scenarios. Existing approaches either operate directly in 3D, which ensures geometric consistency but often lacks generative expressiveness, or rely on 2D amodal completion, which provides strong appearance priors but does not guarantee reliable 3D structure. This raises a key question: how can we achieve both generative plausibility and geometric coherence in amodal 3D modeling? To answer this question, we introduce GENA3D (GENarative Amodal 3D), a framework that integrates learned 2D generative priors with explicit 3D geometric reasoning within a conditional 3D generation paradigm. The 2D priors enable the model to plausibly infer diverse occluded content, while the 3D representation enforces multi-view consistency and spatial validity. Our design incorporates a novel View-Wise Cross-Attention for multi-view alignment and a Stereo-Conditioned Cross-Attention to anchor generative predictions in 3D relationships. By combining generative imagination with structural constraints, GENA3D generates complete and coherent 3D objects from limited observations without sacrificing geometric fidelity. Experiments demonstrate that our method outperforms existing approaches in both synthetic and real-world amodal scenarios, highlighting the effectiveness of bridging 2D priors and 3D coherence in generating plausible and geometrically consistent 3D structures in complex environments.
-                </p>
-            </div>
-        </div>
+  <!-- ═════════════ HEADLINE NUMBERS ═════════════ -->
+  <section class="numbers" aria-label="Key results">
+    <div class="wrap numbers-inner">
+      <div class="num">
+        <span class="num-v">67.0</span>
+        <span class="num-l">Perceptual coherence (PCS), 4 views</span>
+        <span class="num-d">VLM-judged, on GSO. Amodal3R: <b>46.2</b></span>
+      </div>
+      <div class="num">
+        <span class="num-v">30.73</span>
+        <span class="num-l">FID, 4 views</span>
+        <span class="num-d">Lowest of all methods. Amodal3R: <b>35.15</b></span>
+      </div>
+      <div class="num">
+        <span class="num-v">78.2<small>%</small></span>
+        <span class="num-l">Human preference</span>
+        <span class="num-d">Over Amodal3R at 4 views, <b>30 objects × 10 raters</b></span>
+      </div>
+      <div class="num">
+        <span class="num-v">1&rarr;20</span>
+        <span class="num-l">Input views</span>
+        <span class="num-d">FID keeps improving, <b>33.91 &rarr; 29.43</b></span>
+      </div>
     </div>
-    
+  </section>
 
-    <hr class="divider" />
-    <div class="container" style="max-width: 1200px;">
-        <div class="row">
-            <div class="col-md-12">
-                <h2>Proposed Framework & Method </h2>
-                <p> Overview of GENA3D. Given sparse images, visibility masks, and occlusion masks indicating the occluded object, GENA3D first generates a sparse structure by aggregating multi-view information and infers the complete geometric structure from the partial stereo point cloud. Once the sparse structure is obtained, we employ a pretrained amodal SLAT Transformer, controlling texture generation with visibility masks and occlusion masks and then decode into an occlusion-free 3D object with high-quality geometry and appearance.</p>
-                <div class="container" style="max-width: 1200px;">
-                    <div class="row">
-                        <div class="col-md-12">
-                        <img src="sources/pipeline_overall.png" alt="architecture" style="width: 100%">
-                        </div>
-                    </div>
-                </div>
-            </div>
+  <!-- ═════════════ OVERVIEW ═════════════ -->
+  <section class="section" id="overview">
+    <div class="wrap">
+      <div class="sec-head">
+        <p class="sec-ref">Overview<span>Figure 1</span></p>
+        <div>
+          <h2 class="sec-title">Imagine in 2D, settle it in 3D</h2>
+          <p class="sec-lead">Objects in real scenes are partly hidden. Recovering the full object means inventing what was never seen, while keeping everything that was seen exactly right.</p>
         </div>
+      </div>
+
+      <div class="demo">
+        <video id="demo-video" muted loop playsinline preload="metadata" poster="static/video/demo.jpg" src="static/video/demo.mp4" aria-label="Animated overview: partly occluded views are completed in 2D, the inconsistent completions are fused by GENA3D into one coherent 3D chair"></video>
+      </div>
+
+      <div class="contrast">
+        <div class="c-card">
+          <span class="k">(a) Reconstruct in 3D</span>
+          <h3>Faithful, but full of holes</h3>
+          <p>Multi-view stereo keeps the visible geometry consistent, yet has nothing to say about the parts no camera saw.</p>
+          <div class="verdict"><span class="pill pill--yes">3D coherent</span><span class="pill pill--no">not generative</span></div>
+        </div>
+        <div class="c-card">
+          <span class="k">(b) Complete in 2D, then lift</span>
+          <h3>Complete, but contradictory</h3>
+          <p>2D amodal completion imagines the hidden parts convincingly, but each view imagines something different.</p>
+          <div class="verdict"><span class="pill pill--yes">generative</span><span class="pill pill--no">inconsistent across views</span></div>
+        </div>
+        <div class="c-card c-card--ours">
+          <span class="k">(c) GENA3D</span>
+          <h3>2D priors propose, 3D geometry decides</h3>
+          <p>Completed views drive a conditional 3D generator, while partial stereo geometry anchors it to what was actually observed.</p>
+          <div class="verdict"><span class="pill pill--yes">generative</span><span class="pill pill--yes">3D coherent</span></div>
+        </div>
+      </div>
+
+      <div class="overview-grid">
+        <figure class="plate">
+          <button class="plate-img" type="button" data-zoom="static/img/teaser.webp" aria-label="Enlarge Figure 1">
+            <img src="static/img/teaser.webp" alt="Pinocchio behind a crate: sparse input views, (a) an incomplete MVS reconstruction, (b) an inconsistent 2D-to-3D lift, and (c) a complete GENA3D result with normals." width="1481" height="726" loading="lazy">
+            <span class="zoom" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="6"/><path d="m20 20-4.5-4.5M11 8v6M8 11h6"/></svg></span>
+          </button>
+          <figcaption><span class="fig-no">Fig. 1</span>From sparse, partially occluded inputs: (a) MVS reconstruction (e.g., VGGT), (b) 2D amodal completion lifted to 3D (TRELLIS), (c) GENA3D.</figcaption>
+        </figure>
+        <div class="prose">
+          <p>Generating complete 3D objects under partial occlusions (i.e., amodal scenarios) is a practically important yet challenging problem, as large portions of object geometry are unobserved in real-world scenarios. Existing approaches either operate directly in 3D, which ensures geometric consistency but often lacks generative expressiveness, or rely on 2D amodal completion, which provides strong appearance priors but does not guarantee reliable 3D structure. This raises a key question: how can we achieve both generative plausibility and geometric coherence in amodal 3D modeling?</p>
+          <p>To answer this question, we introduce <strong>GENA3D</strong> (GENerative Amodal 3D), a framework that integrates learned 2D generative priors with explicit 3D geometric reasoning within a conditional 3D generation paradigm. The 2D priors enable the model to plausibly infer diverse occluded content, while the 3D representation enforces multi-view consistency and spatial validity. Our design incorporates a novel <strong>View-Wise Cross-Attention</strong> for multi-view alignment and a <strong>Stereo-Conditioned Cross-Attention</strong> to anchor generative predictions in 3D relationships.</p>
+          <p>By combining generative imagination with structural constraints, GENA3D generates complete and coherent 3D objects from limited observations without sacrificing geometric fidelity. Experiments demonstrate that our method outperforms existing approaches in both synthetic and real-world amodal scenarios, highlighting the effectiveness of bridging 2D priors and 3D coherence in generating plausible and geometrically consistent 3D structures in complex environments.</p>
+        </div>
+      </div>
     </div>
+  </section>
 
-    <hr class="divider" />
-    <div class="container" style="max-width: 1200px;">
-        <div class="row">
-            <div class="col-md-12">
-                <p> A detailed illustration of our proposed View-Wise Cross Attention and Stereo-Conditioned Cross Attention. Specifically, we aggregate sparse-view information and fuse them in a view-wise manner and then infer the unobserved geometry structure with observed partial stereo as condition, preserving the geometric consistency and plausibility.</p>
-                <div class="container" style="max-width: 1200px;">
-                    <div class="row">
-                        <div class="col-md-12">
-                            <img src="sources/pipeline_proposed.png" alt="architecture" style="width: 60%; display: block; margin: 0 auto;">
-                        </div>
-                    </div>
-                </div>
-            </div>
+  <!-- ═════════════ METHOD ═════════════ -->
+  <section class="section" id="method">
+    <div class="wrap">
+      <div class="sec-head">
+        <p class="sec-ref">§3 Method<span>Figures 2–4</span></p>
+        <div>
+          <h2 class="sec-title">From 1–4 unposed views to one complete object</h2>
+          <p class="sec-lead">GENA3D builds on a two-stage 3D generator. Only the first stage, which decides the object's sparse structure, is retrained, and it gains two conditioning modules.</p>
         </div>
+      </div>
+
+      <figure class="plate">
+        <button class="plate-img" type="button" data-zoom="static/img/pipeline.webp" aria-label="Enlarge Figure 2">
+          <img src="static/img/pipeline.webp" alt="GENA3D pipeline: sparse images and visibility masks go through 2D amodal completion and a multi-view stereo model; stage 1 generates a sparse structure with view-wise and stereo-conditioned cross attention; stage 2 generates structured latents with masked and occlusion-aware cross attention; the latents are decoded into a 3D object." width="1467" height="479" loading="lazy">
+          <span class="zoom" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="6"/><path d="m20 20-4.5-4.5M11 8v6M8 11h6"/></svg></span>
+        </button>
+        <figcaption><span class="fig-no">Fig. 2</span>Given sparse images S, visibility masks M<sub>vis</sub> and occlusion masks M<sub>occ</sub> of a target object, GENA3D generates a sparse structure by aggregating multi-view information and inferring the complete structure from the partial stereo point cloud. A pretrained amodal SLAT transformer then generates the structured latent, which is decoded into an occlusion-free 3D object.</figcaption>
+      </figure>
+
+      <ol class="steps">
+        <li class="step">
+          <h3>Observe</h3>
+          <p>K sparse, unposed views (typically 1–4). Visibility masks and a text prompt come from foundation models such as SAM and Florence-2.</p>
+          <span class="who">input · M<sub>vis</sub></span>
+        </li>
+        <li class="step">
+          <h3>Complete in 2D</h3>
+          <p>Each view is amodally completed on its own. The results look plausible but disagree with each other.</p>
+          <span class="who">OAAC · I, M<sub>occ</sub></span>
+        </li>
+        <li class="step step--new">
+          <h3>Fuse the views</h3>
+          <p>View-Wise Cross Attention reads every completed view in parallel and fuses them by visibility.</p>
+          <span class="who">new · §3.1</span>
+        </li>
+        <li class="step step--new">
+          <h3>Anchor in 3D</h3>
+          <p>Stereo-Conditioned Cross Attention gates attention with the partial point cloud from an MVS model.</p>
+          <span class="who">new · §3.2</span>
+        </li>
+        <li class="step">
+          <h3>Generate detail</h3>
+          <p>A pretrained amodal SLAT transformer adds appearance and decodes the complete object.</p>
+          <span class="who">stage 2 · frozen</span>
+        </li>
+      </ol>
+
+      <div class="modules">
+        <div class="mcard">
+          <span class="k">§3.1 · multi-view alignment</span>
+          <h3>View-Wise Cross Attention</h3>
+          <p>Conditioning on one view per sampling step, or concatenating all views, lets later views overwrite earlier structure and lets inconsistent completions pile up as geometric drift. GENA3D instead attends to every view in parallel at every step, and weights each view by how much of the object it actually saw.</p>
+          <code class="math"><span class="h">z'ₙ</span> = CA(z, DINO(iⁿ))          <span class="c">for every view n</span>
+<span class="h">z'</span>  = (1/K) Σₙ wₙ z'ₙ ,  wₙ = τₙ / Σⱼ τⱼ
+<span class="h">τₙ</span>  = m<sub>v</sub>ⁿ / (m<sub>o</sub>ⁿ + m<sub>v</sub>ⁿ)      <span class="c">visibility ratio</span></code>
+          <p class="why"><b>Why it works:</b> the base generator always produces objects in a canonical pose, whatever the camera. Views can therefore be fused without knowing their poses. In 100 GSO objects × 10 viewpoints, 97.6% of generations land in the canonical axis-aligned frame.</p>
+          <span class="tag">Without it (2 views): FID 32.12 &rarr; <b>38.64</b></span>
+        </div>
+        <div class="mcard">
+          <span class="k">§3.2 · geometric anchoring</span>
+          <h3>Stereo-Conditioned Cross Attention</h3>
+          <p>Geometry added as extra tokens is easy to ignore, especially when it is partial and noisy. Here the partial point cloud of the target, lifted from an MVS model (π³) and cut out by the visibility masks, is voxelized at 64³, encoded, and turned into a gate inside the attention logits.</p>
+          <code class="math"><span class="h">P_O</span>   = ∪ₙ { p ∈ MVS(sⁿ) | m<sub>v</sub>ⁿ(p) = 1 }
+<span class="h">c_geo</span> = Linear(Patchify(Enc(Voxelize(P_O, 64³))))
+<span class="h">g</span>     = σ(MLP(c_geo))
+<span class="h">α</span>     = softmax( QKᵀ/√D + log(g + ε) )</code>
+          <p class="why"><b>Robust to bad stereo:</b> when the reconstructed points are misaligned or overlap across views, the generative prior takes over and corrects them (Fig. 7).</p>
+          <span class="tag">Without it (2 views): FID 32.12 &rarr; <b>42.92</b>, MMD 5.50 &rarr; <b>5.91</b></span>
+        </div>
+      </div>
+
+      <div class="figpair">
+        <figure class="plate">
+          <button class="plate-img" type="button" data-zoom="static/img/modules.webp" aria-label="Enlarge Figure 4">
+            <img src="static/img/modules.webp" alt="Module detail: completed views are encoded with DINOv2 and attended per view, then fused; the partial point cloud is voxelized, encoded by the sparse-structure VAE, patchified and used in a gated cross attention." width="717" height="480" loading="lazy">
+            <span class="zoom" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="6"/><path d="m20 20-4.5-4.5M11 8v6M8 11h6"/></svg></span>
+          </button>
+          <figcaption><span class="fig-no">Fig. 4</span>View-Wise Cross Attention and Stereo-Conditioned Cross Attention in detail.</figcaption>
+        </figure>
+        <figure class="plate">
+          <button class="plate-img" type="button" data-zoom="static/img/view_dominance.webp" aria-label="Enlarge Figure 3">
+            <img src="static/img/view_dominance.webp" alt="Two input views of a bed produce a generated bed with duplicated pillows and headboard." width="500" height="536" loading="lazy">
+            <span class="zoom" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="6"/><path d="m20 20-4.5-4.5M11 8v6M8 11h6"/></svg></span>
+          </button>
+          <figcaption><span class="fig-no">Fig. 3</span>The original model, conditioned on multiple views, is biased and accumulates artifacts such as a doubled headboard.</figcaption>
+        </figure>
+      </div>
+
+      <div class="facts" aria-label="Training setup">
+        <div class="fact"><b>13,957 objects</b><span>3D-FUTURE (9,472) and ABO (4,485), made watertight.</span></div>
+        <div class="fact"><b>20–60% hidden</b><span>3D-consistent occlusion masks grown face by face over each mesh.</span></div>
+        <div class="fact"><b>1–4 views</b><span>Sampled per batch; stereo point clouds are computed on the fly.</span></div>
+        <div class="fact"><b>~16 hours</b><span>12 epochs on 8 RTX 6000 GPUs with a flow-matching objective.</span></div>
+      </div>
     </div>
+  </section>
 
-    <br><br>
-                
-    <hr class="divider" />
-    <div class="container" style="max-width: 1200px;">
-        <div class="row">
-            <div class="col-sm-12">
-                <h2>Qualitative Results</h2>
-            </div>
-            <p>
-                Amodal 3D object generation results on Google Scanned Object (GSO) dataset.
-            </p>
-            <div class="container" style="max-width: 1200px;">
-                <div class="row">
-                    <div class="col-md-12">
-                    <img src="sources/qual_gso.png" alt="architecture" style="width: 100%">
-                    </div>
-                </div>
-            </div>
+  <!-- ═════════════ RESULTS ═════════════ -->
+  <section class="section" id="results">
+    <div class="wrap">
+      <div class="sec-head">
+        <p class="sec-ref">§4 Experiments<span>Tables 1–2 · Figure 5</span></p>
+        <div>
+          <h2 class="sec-title">The most coherent objects at every view count</h2>
+          <p class="sec-lead">All 1,030 objects of <strong>Google Scanned Objects</strong>, with 3D-consistent occlusions and views whose visible part covers 30–70% of the render. Baselines get the same 2D amodal completion (OAAC) where they need it.</p>
         </div>
+      </div>
+
+      <div class="panel">
+        <div class="tbl-wrap">
+          <table class="t">
+            <caption><b>Table 1</b>Amodal 3D object generation on GSO with 1, 2 and 4 views. <span class="best">Bold</span>: best, <span class="second">underlined</span>: second best within each setting. OAAC: per-view 2D amodal completion. ‡ OAAC on one view, then multi-view diffusion (OAAC + MV). SAM3D is evaluated single-view only, following its official setup.</caption>
+            <thead><tr><th class="l">Views</th><th class="l">Method</th><th class="l">2D amodal</th><th>FID ↓</th><th>KID (%) ↓</th><th>CLIP (%) ↑</th><th>MMD (‰) ↓</th><th>COV (%) ↑</th><th>PCS (%) ↑</th></tr></thead>
+            <tbody>
+              <tr><td class="l" rowspan="5">1 view</td><td class="l">TRELLIS</td><td class="l">OAAC</td><td>49.68</td><td>3.21</td><td>76.79</td><td>6.08</td><td>33.37</td><td>21.1</td></tr>
+              <tr><td class="l">FreeSplatter ‡</td><td class="l">OAAC + MV</td><td>72.88</td><td>4.68</td><td>78.14</td><td>7.24</td><td>35.78</td><td>25.5</td></tr>
+              <tr><td class="l">Amodal3R</td><td class="l">N/A</td><td>39.05</td><td class="best">0.44</td><td>80.06</td><td class="second">5.52</td><td>38.64</td><td>46.3</td></tr>
+              <tr><td class="l">SAM3D</td><td class="l">N/A</td><td class="second">34.68</td><td class="second">0.46</td><td class="second">82.16</td><td class="best">5.50</td><td class="second">39.03</td><td class="second">46.5</td></tr>
+              <tr class="ours grp-end"><td class="l">GENA3D (ours)</td><td class="l">OAAC</td><td class="best">33.91</td><td class="second">0.46</td><td class="best">82.23</td><td>5.68</td><td class="best">39.19</td><td class="best">61.9</td></tr>
+              <tr><td class="l" rowspan="4">2 views</td><td class="l">TRELLIS</td><td class="l">OAAC</td><td>46.23</td><td>3.28</td><td>77.01</td><td>6.27</td><td>34.12</td><td>25.0</td></tr>
+              <tr><td class="l">FreeSplatter</td><td class="l">OAAC</td><td>91.32</td><td>6.77</td><td>74.24</td><td>10.44</td><td>27.74</td><td>12.4</td></tr>
+              <tr><td class="l">Amodal3R</td><td class="l">N/A</td><td class="second">35.52</td><td class="best">0.44</td><td class="second">81.84</td><td class="second">5.52</td><td class="second">38.92</td><td class="second">47.1</td></tr>
+              <tr class="ours grp-end"><td class="l">GENA3D (ours)</td><td class="l">OAAC</td><td class="best">32.12</td><td class="second">0.45</td><td class="best">82.33</td><td class="best">5.50</td><td class="best">39.08</td><td class="best">66.3</td></tr>
+              <tr><td class="l" rowspan="5">4 views</td><td class="l">TRELLIS</td><td class="l">OAAC</td><td>45.41</td><td>2.79</td><td>78.17</td><td>5.94</td><td>34.42</td><td>23.2</td></tr>
+              <tr><td class="l">TRELLIS ‡</td><td class="l">OAAC + MV</td><td>44.85</td><td class="second">1.94</td><td>76.24</td><td>6.71</td><td>34.24</td><td>28.6</td></tr>
+              <tr><td class="l">FreeSplatter</td><td class="l">OAAC</td><td>94.10</td><td>4.64</td><td>75.58</td><td>10.48</td><td>32.31</td><td>8.4</td></tr>
+              <tr><td class="l">Amodal3R</td><td class="l">N/A</td><td class="second">35.15</td><td class="best">0.43</td><td class="second">82.04</td><td class="second">5.51</td><td class="second">38.83</td><td class="second">46.2</td></tr>
+              <tr class="ours grp-end"><td class="l">GENA3D (ours)</td><td class="l">OAAC</td><td class="best">30.73</td><td class="best">0.43</td><td class="best">82.53</td><td class="best">5.48</td><td class="best">39.48</td><td class="best">67.0</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="note">FID and KID measure render quality, CLIP the similarity to the input, MMD and COV the geometry, and PCS a VLM-rated perceptual coherence (Qwen3-VL 32B, 0–100). A human study agrees with PCS: GENA3D is preferred over Amodal3R in 65.4%, 74.1% and 78.2% of comparisons at 1, 2 and 4 views.</p>
+      </div>
+
+      <figure class="plate" style="margin-top:18px">
+        <button class="plate-img" type="button" data-zoom="static/img/gso_comparison.webp" aria-label="Enlarge Figure 5">
+          <img src="static/img/gso_comparison.webp" alt="Qualitative comparison on GSO with 1, 2 and 4 occluded views: TRELLIS, FreeSplatter, Amodal3R, SAM3D and GENA3D on a cabinet, an Android figure, a winged pony, a horse, a toy road roller and a Mario figure." width="2034" height="1087" loading="lazy">
+          <span class="zoom" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="6"/><path d="m20 20-4.5-4.5M11 8v6M8 11h6"/></svg></span>
+        </button>
+        <figcaption><span class="fig-no">Fig. 5</span>Amodal 3D generation on GSO with 1, 2 and 4 views. For FreeSplatter, Hunyuan-MV generates the extra views from the single input.</figcaption>
+      </figure>
+
+      <div class="panel">
+        <div class="tbl-wrap">
+          <table class="t" style="min-width:420px">
+            <caption><b>Table 2</b>Faithfulness to what was observed: SSIM, PSNR and LPIPS computed only inside the visibility masks, at the input views.</caption>
+            <thead><tr><th class="l">Views</th><th class="l">Method</th><th>SSIM ↑</th><th>PSNR ↑</th><th>LPIPS ↓</th></tr></thead>
+            <tbody>
+              <tr><td class="l" rowspan="4">1 view</td><td class="l">TRELLIS</td><td>0.721</td><td>14.15</td><td>0.325</td></tr>
+              <tr><td class="l">SAM3D</td><td>0.797</td><td>15.54</td><td class="best">0.226</td></tr>
+              <tr><td class="l">Amodal3R</td><td class="second">0.814</td><td class="second">16.41</td><td>0.241</td></tr>
+              <tr class="ours grp-end"><td class="l">GENA3D (ours)</td><td class="best">0.832</td><td class="best">16.52</td><td class="second">0.231</td></tr>
+              <tr><td class="l" rowspan="3">2 views</td><td class="l">TRELLIS</td><td>0.686</td><td>13.98</td><td>0.346</td></tr>
+              <tr><td class="l">Amodal3R</td><td class="second">0.819</td><td class="second">16.52</td><td class="second">0.238</td></tr>
+              <tr class="ours grp-end"><td class="l">GENA3D (ours)</td><td class="best">0.837</td><td class="best">16.99</td><td class="best">0.212</td></tr>
+              <tr><td class="l" rowspan="3">4 views</td><td class="l">TRELLIS</td><td>0.674</td><td>13.66</td><td>0.357</td></tr>
+              <tr><td class="l">Amodal3R</td><td class="second">0.832</td><td class="second">16.64</td><td class="second">0.236</td></tr>
+              <tr class="ours grp-end"><td class="l">GENA3D (ours)</td><td class="best">0.838</td><td class="best">16.98</td><td class="best">0.208</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
     </div>
+  </section>
 
-    <!-- <hr class="divider" />
-    <div class="container" style="max-width: 1200px;">
-        <div class="row">
-            <div class="col-sm-12">
-                <h2>Additional results and visualizations </h2>
-            </div>
+  <!-- ═════════════ 360° GALLERY ═════════════ -->
+  <section class="section" id="gallery">
+    <div class="wrap">
+      <div class="sec-head">
+        <p class="sec-ref">Supplementary<span>360° renders</span></p>
+        <div>
+          <h2 class="sec-title">Every object, all the way around</h2>
+          <p class="sec-lead">Turntable renders from the supplementary material, each shown with the occluded input views it was generated from. Switch to <strong>Geometry</strong> to see the surface normals, hover a card to flip just that one, or click the inputs to enlarge them.</p>
         </div>
-
-        <div class="container" style="max-width: 1200px;">
-            <div class="row">
-                <div class="col-md-12">
-                    <p>
-                        In this part, we first present more 4D scenes generated by our CoCo4D.
-                    </p>
-                </div>
-            </div>
+      </div>
+      <div class="g-bar">
+        <div class="tabs" role="tablist" aria-label="Video gallery">
+          <button role="tab" id="gt-gso" aria-controls="gp-gso" aria-selected="true">Objects (GSO) <i>11</i></button>
+          <button role="tab" id="gt-scene" aria-controls="gp-scene" aria-selected="false" tabindex="-1">In the scene <i>11</i></button>
+          <button role="tab" id="gt-wild" aria-controls="gp-wild" aria-selected="false" tabindex="-1">In the wild <i>8</i></button>
         </div>
-
-
-        <div class="container" style="max-width: 1200px;">
-            <div class="row captioned_videos">
-            <div class="col-6">
-                <div class="video-compare-container" style="width: 100%">
-                    <video class="video lazy" loop playsinline autoplay muted style="width: 100%">
-                        <source data-src="videos/horse.mp4" type="video/mp4"></source>
-                    </video>
-                    <h4 class="caption">On the table, a toy rocking horse sways back and forth slowly as it inches forward, flashes of lightning in the background.</h4>
-                </div>
-            </div>
-            <div class="col-6">
-                <div class="video-compare-container" style="width: 100%">
-                    <video class="video lazy" loop playsinline autoplay muted style="width: 100%">
-                        <source data-src="videos/astro.mp4" type="video/mp4"></source>
-                    </video>
-                    <h4 class="caption">The astronaut slowly standing up on a rocky planet, with a bright planet and stars twinkling behind him.</h4>
-                </div>
-            </div>
+        <div class="seg" role="group" aria-label="Render shown">
+          <button type="button" aria-pressed="true" data-mode="tex"><i style="background:#fff;border:1px solid var(--line-strong)"></i>Texture</button>
+          <button type="button" aria-pressed="false" data-mode="geo"><i style="background:conic-gradient(var(--nx),var(--ny),var(--nz),var(--nx))"></i>Geometry</button>
         </div>
-
-        </div>
-        <div class="container" style="max-width: 1200px;">
-            <div class="row captioned_videos">
-            <div class="col-6">
-                <div class="video-compare-container" style="width: 100%">
-                    <video class="video lazy" loop playsinline autoplay muted style="width: 100%">
-                        <source data-src="videos/crab_cropped.mp4" type="video/mp4"></source>
-                    </video>
-                    <h4 class="caption">A hermit crab moves slowly and steadily from left to right across a glistening beach.</h4>
-                </div>
-            </div>
-            <div class="col-6">
-                <div class="video-compare-container" style="width: 100%">
-                    <video class="video lazy" loop playsinline autoplay muted style="width: 100%">
-                        <source data-src="videos/hamster.mp4" type="video/mp4"></source>
-                    </video>
-                    <h4 class="caption">An adorable hamster lounges leisurely on a floatie, sporting stylish sunglasses, drifting across the sparkling sea as gentle waves ripple around it. The hamster stretches contentedly.</h4>
-                </div>
-            </div>
-            </div>
-        </div>
-
-        <br><br>
-
-        <div class="container" style="max-width: 1200px;">
-            <div class="row">
-                <div class="col-md-12">
-                    <p>
-                        Moreover, we present some dynamic background scenes only to demonstrate the ability of our CoCo4D in generating comprehensive and complex 4D scenes.
-                    </p>
-                </div>
-            </div>
-        </div>
-
-        </div>
-        <div class="container" style="max-width: 1200px;">
-            <div class="row captioned_videos">
-            <div class="col-6">
-                <div class="video-compare-container" style="width: 100%">
-                    <video class="video lazy" loop playsinline autoplay muted style="width: 100%">
-                        <source data-src="videos/bg_anime.mp4" type="video/mp4"></source>
-                    </video>
-                </div>
-            </div>
-            <div class="col-6">
-                <div class="video-compare-container" style="width: 100%">
-                    <video class="video lazy" loop playsinline autoplay muted style="width: 100%">
-                        <source data-src="videos/bg_firework.mp4" type="video/mp4"></source>
-                    </video>
-                </div>
-            </div>
-            </div>
-        </div>
-    </div> -->
-
-    <hr class="divider" />
-    <div class="container" style="max-width: 1200px;">
-        <div class="row">
-            <div class="col-sm-12">
-                <h2>In-the-wild & In-the-scene Results</h2>
-            </div>
-            <p>
-                We use in-the-wild real captures from 3D reconstruction datasets to validate our method's ability in real-world scenarios.
-            </p>
-            <div class="container" style="max-width: 1200px;">
-                <div class="row">
-                    <div class="col-md-12">
-                    <img src="sources/inthewild.png" alt="architecture" style="width: 100%">
-                    </div>
-                </div>
-            </div>
-        </div>
+      </div>
+      <div class="tabpanel" role="tabpanel" id="gp-gso" aria-labelledby="gt-gso">
+      <div class="g-grid" data-mode="tex">
+        <figure class="g-card">
+          <div class="g-media">
+            <video muted loop playsinline preload="none" poster="static/video/g/gso-mario.jpg" data-src="static/video/g/gso-mario.mp4" aria-label="Mario figure, 360-degree render generated by GENA3D"></video>
+            <button class="g-flip" type="button" aria-pressed="false" aria-label="Flip Mario figure between texture and geometry"></button>
+          </div>
+          <button class="g-input g-input--obj" type="button" data-zoom="static/img/inputs/in-59bd229aaa.webp" data-alt="Occluded input views of the mario figure" aria-label="Enlarge the 4 views of input for Mario figure">
+            <span class="g-input-k"><span>Input</span><span>4 views</span></span>
+            <span class="g-thumbs"><img src="static/img/inputs/in-a3d79f86a6.webp" alt="" width="131" height="168" loading="lazy"><img src="static/img/inputs/in-2cbd5edd64.webp" alt="" width="95" height="169" loading="lazy"><img src="static/img/inputs/in-6704f3ae67.webp" alt="" width="92" height="168" loading="lazy"><img src="static/img/inputs/in-4a09663f4d.webp" alt="" width="113" height="177" loading="lazy"></span>
+          </button>
+          <figcaption>Mario figure</figcaption>
+        </figure>
+        <figure class="g-card">
+          <div class="g-media">
+            <video muted loop playsinline preload="none" poster="static/video/g/gso-pony.jpg" data-src="static/video/g/gso-pony.mp4" aria-label="Winged pony, 360-degree render generated by GENA3D"></video>
+            <button class="g-flip" type="button" aria-pressed="false" aria-label="Flip Winged pony between texture and geometry"></button>
+          </div>
+          <button class="g-input g-input--obj" type="button" data-zoom="static/img/inputs/in-037ac25d6d.webp" data-alt="Occluded input views of the winged pony" aria-label="Enlarge the 2 views of input for Winged pony">
+            <span class="g-input-k"><span>Input</span><span>2 views</span></span>
+            <span class="g-thumbs"><img src="static/img/inputs/in-90dfd71f11.webp" alt="" width="105" height="145" loading="lazy"><img src="static/img/inputs/in-233362782e.webp" alt="" width="120" height="152" loading="lazy"></span>
+          </button>
+          <figcaption>Winged pony</figcaption>
+        </figure>
+        <figure class="g-card">
+          <div class="g-media">
+            <video muted loop playsinline preload="none" poster="static/video/g/gso-horse.jpg" data-src="static/video/g/gso-horse.mp4" aria-label="Horse, 360-degree render generated by GENA3D"></video>
+            <button class="g-flip" type="button" aria-pressed="false" aria-label="Flip Horse between texture and geometry"></button>
+          </div>
+          <button class="g-input g-input--obj" type="button" data-zoom="static/img/inputs/in-5ccdf9ca6a.webp" data-alt="Occluded input views of the horse" aria-label="Enlarge the 2 views of input for Horse">
+            <span class="g-input-k"><span>Input</span><span>2 views</span></span>
+            <span class="g-thumbs"><img src="static/img/inputs/in-6b728fd454.webp" alt="" width="119" height="133" loading="lazy"><img src="static/img/inputs/in-3855cc67e0.webp" alt="" width="130" height="136" loading="lazy"></span>
+          </button>
+          <figcaption>Horse</figcaption>
+        </figure>
+        <figure class="g-card">
+          <div class="g-media">
+            <video muted loop playsinline preload="none" poster="static/video/g/gso-roller.jpg" data-src="static/video/g/gso-roller.mp4" aria-label="Toy road roller, 360-degree render generated by GENA3D"></video>
+            <button class="g-flip" type="button" aria-pressed="false" aria-label="Flip Toy road roller between texture and geometry"></button>
+          </div>
+          <button class="g-input g-input--obj" type="button" data-zoom="static/img/inputs/in-e561c1c754.webp" data-alt="Occluded input views of the toy road roller" aria-label="Enlarge the 4 views of input for Toy road roller">
+            <span class="g-input-k"><span>Input</span><span>4 views</span></span>
+            <span class="g-thumbs"><img src="static/img/inputs/in-3e1e89c2d9.webp" alt="" width="125" height="85" loading="lazy"><img src="static/img/inputs/in-ce1787eb25.webp" alt="" width="128" height="95" loading="lazy"><img src="static/img/inputs/in-1da971a218.webp" alt="" width="122" height="96" loading="lazy"><img src="static/img/inputs/in-8dc2ec60a5.webp" alt="" width="126" height="76" loading="lazy"></span>
+          </button>
+          <figcaption>Toy road roller</figcaption>
+        </figure>
+        <figure class="g-card">
+          <div class="g-media">
+            <video muted loop playsinline preload="none" poster="static/video/g/gso-cabinet.jpg" data-src="static/video/g/gso-cabinet.mp4" aria-label="Toy cabinet, 360-degree render generated by GENA3D"></video>
+            <button class="g-flip" type="button" aria-pressed="false" aria-label="Flip Toy cabinet between texture and geometry"></button>
+          </div>
+          <button class="g-input g-input--obj" type="button" data-zoom="static/img/inputs/in-98e4770611.webp" data-alt="Occluded input views of the toy cabinet" aria-label="Enlarge the 1 view of input for Toy cabinet">
+            <span class="g-input-k"><span>Input</span><span>1 view</span></span>
+            <span class="g-thumbs"><img src="static/img/inputs/in-930a971ee6.webp" alt="" width="64" height="141" loading="lazy"></span>
+          </button>
+          <figcaption>Toy cabinet</figcaption>
+        </figure>
+        <figure class="g-card">
+          <div class="g-media">
+            <video muted loop playsinline preload="none" poster="static/video/g/gso-android.jpg" data-src="static/video/g/gso-android.mp4" aria-label="Android figure, 360-degree render generated by GENA3D"></video>
+            <button class="g-flip" type="button" aria-pressed="false" aria-label="Flip Android figure between texture and geometry"></button>
+          </div>
+          <button class="g-input g-input--obj" type="button" data-zoom="static/img/inputs/in-250d365460.webp" data-alt="Occluded input views of the android figure" aria-label="Enlarge the 1 view of input for Android figure">
+            <span class="g-input-k"><span>Input</span><span>1 view</span></span>
+            <span class="g-thumbs"><img src="static/img/inputs/in-00c1150933.webp" alt="" width="97" height="148" loading="lazy"></span>
+          </button>
+          <figcaption>Android figure</figcaption>
+        </figure>
+        <figure class="g-card">
+          <div class="g-media">
+            <video muted loop playsinline preload="none" poster="static/video/g/gso-rhino.jpg" data-src="static/video/g/gso-rhino.mp4" aria-label="Rhino ride-on toy, 360-degree render generated by GENA3D"></video>
+            <button class="g-flip" type="button" aria-pressed="false" aria-label="Flip Rhino ride-on toy between texture and geometry"></button>
+          </div>
+          <button class="g-input g-input--obj" type="button" data-zoom="static/img/inputs/in-d1f233e706.webp" data-alt="Occluded input views of the rhino ride-on toy" aria-label="Enlarge the 1 view of input for Rhino ride-on toy">
+            <span class="g-input-k"><span>Input</span><span>1 view</span></span>
+            <span class="g-thumbs"><img src="static/img/inputs/in-122f409896.webp" alt="" width="130" height="203" loading="lazy"></span>
+          </button>
+          <figcaption>Rhino ride-on toy</figcaption>
+        </figure>
+        <figure class="g-card">
+          <div class="g-media">
+            <video muted loop playsinline preload="none" poster="static/video/g/gso-cleat.jpg" data-src="static/video/g/gso-cleat.mp4" aria-label="Soccer cleat, 360-degree render generated by GENA3D"></video>
+            <button class="g-flip" type="button" aria-pressed="false" aria-label="Flip Soccer cleat between texture and geometry"></button>
+          </div>
+          <button class="g-input g-input--obj" type="button" data-zoom="static/img/inputs/in-99215c750c.webp" data-alt="Occluded input views of the soccer cleat" aria-label="Enlarge the 2 views of input for Soccer cleat">
+            <span class="g-input-k"><span>Input</span><span>2 views</span></span>
+            <span class="g-thumbs"><img src="static/img/inputs/in-6cbcd45cdb.webp" alt="" width="78" height="94" loading="lazy"><img src="static/img/inputs/in-f0793ba2f4.webp" alt="" width="120" height="109" loading="lazy"></span>
+          </button>
+          <figcaption>Soccer cleat</figcaption>
+        </figure>
+        <figure class="g-card">
+          <div class="g-media">
+            <video muted loop playsinline preload="none" poster="static/video/g/gso-elephant.jpg" data-src="static/video/g/gso-elephant.mp4" aria-label="Elephant plush, 360-degree render generated by GENA3D"></video>
+            <button class="g-flip" type="button" aria-pressed="false" aria-label="Flip Elephant plush between texture and geometry"></button>
+          </div>
+          <button class="g-input g-input--obj" type="button" data-zoom="static/img/inputs/in-ddb1ba67d0.webp" data-alt="Occluded input views of the elephant plush" aria-label="Enlarge the 2 views of input for Elephant plush">
+            <span class="g-input-k"><span>Input</span><span>2 views</span></span>
+            <span class="g-thumbs"><img src="static/img/inputs/in-81227b84b4.webp" alt="" width="108" height="209" loading="lazy"><img src="static/img/inputs/in-fdc649add9.webp" alt="" width="164" height="173" loading="lazy"></span>
+          </button>
+          <figcaption>Elephant plush</figcaption>
+        </figure>
+        <figure class="g-card">
+          <div class="g-media">
+            <video muted loop playsinline preload="none" poster="static/video/g/gso-hoodie.jpg" data-src="static/video/g/gso-hoodie.mp4" aria-label="Hooded figurine, 360-degree render generated by GENA3D"></video>
+            <button class="g-flip" type="button" aria-pressed="false" aria-label="Flip Hooded figurine between texture and geometry"></button>
+          </div>
+          <button class="g-input g-input--obj" type="button" data-zoom="static/img/inputs/in-7457e9f789.webp" data-alt="Occluded input views of the hooded figurine" aria-label="Enlarge the 4 views of input for Hooded figurine">
+            <span class="g-input-k"><span>Input</span><span>4 views</span></span>
+            <span class="g-thumbs"><img src="static/img/inputs/in-ee4b0139c2.webp" alt="" width="75" height="185" loading="lazy"><img src="static/img/inputs/in-4a97063ad8.webp" alt="" width="104" height="153" loading="lazy"><img src="static/img/inputs/in-4a4cc5f065.webp" alt="" width="74" height="172" loading="lazy"><img src="static/img/inputs/in-6fd5a1f460.webp" alt="" width="67" height="160" loading="lazy"></span>
+          </button>
+          <figcaption>Hooded figurine</figcaption>
+        </figure>
+        <figure class="g-card">
+          <div class="g-media">
+            <video muted loop playsinline preload="none" poster="static/video/g/gso-cart.jpg" data-src="static/video/g/gso-cart.mp4" aria-label="Toy push cart, 360-degree render generated by GENA3D"></video>
+            <button class="g-flip" type="button" aria-pressed="false" aria-label="Flip Toy push cart between texture and geometry"></button>
+          </div>
+          <button class="g-input g-input--obj" type="button" data-zoom="static/img/inputs/in-1c9ddbe0a1.webp" data-alt="Occluded input views of the toy push cart" aria-label="Enlarge the 4 views of input for Toy push cart">
+            <span class="g-input-k"><span>Input</span><span>4 views</span></span>
+            <span class="g-thumbs"><img src="static/img/inputs/in-76b5e33c17.webp" alt="" width="125" height="123" loading="lazy"><img src="static/img/inputs/in-96ebd3aea6.webp" alt="" width="120" height="105" loading="lazy"><img src="static/img/inputs/in-6d15e27ceb.webp" alt="" width="113" height="118" loading="lazy"><img src="static/img/inputs/in-40e39ba8d3.webp" alt="" width="121" height="124" loading="lazy"></span>
+          </button>
+          <figcaption>Toy push cart</figcaption>
+        </figure>
+      </div>
+      </div>
+      <div class="tabpanel" role="tabpanel" id="gp-scene" aria-labelledby="gt-scene" hidden>
+      <div class="g-grid" data-mode="tex">
+        <figure class="g-card">
+          <div class="g-media">
+            <video muted loop playsinline preload="none" poster="static/video/g/scene-rocking-chair.jpg" data-src="static/video/g/scene-rocking-chair.mp4" aria-label="Rocking chair, 360-degree render generated by GENA3D"></video>
+            <button class="g-flip" type="button" aria-pressed="false" aria-label="Flip Rocking chair between texture and geometry"></button>
+          </div>
+          <button class="g-input g-input--photo" type="button" data-zoom="static/img/inputs/in-fcfce69c55.webp" data-alt="Occluded input views of the rocking chair" aria-label="Enlarge the 1 view of input for Rocking chair">
+            <span class="g-input-k"><span>Input</span><span>1 view</span></span>
+            <span class="g-thumbs"><img src="static/img/inputs/in-e08e0474ef.webp" alt="" width="434" height="324" loading="lazy"></span>
+          </button>
+          <figcaption>Rocking chair</figcaption>
+        </figure>
+        <figure class="g-card">
+          <div class="g-media">
+            <video muted loop playsinline preload="none" poster="static/video/g/scene-sofa.jpg" data-src="static/video/g/scene-sofa.mp4" aria-label="Sofa, 360-degree render generated by GENA3D"></video>
+            <button class="g-flip" type="button" aria-pressed="false" aria-label="Flip Sofa between texture and geometry"></button>
+          </div>
+          <button class="g-input g-input--photo" type="button" data-zoom="static/img/inputs/in-fcfce69c55.webp" data-alt="Occluded input views of the sofa" aria-label="Enlarge the 1 view of input for Sofa">
+            <span class="g-input-k"><span>Input</span><span>1 view</span></span>
+            <span class="g-thumbs"><img src="static/img/inputs/in-e08e0474ef.webp" alt="" width="434" height="324" loading="lazy"></span>
+          </button>
+          <figcaption>Sofa</figcaption>
+        </figure>
+        <figure class="g-card">
+          <div class="g-media">
+            <video muted loop playsinline preload="none" poster="static/video/g/scene-pouf.jpg" data-src="static/video/g/scene-pouf.mp4" aria-label="Pouf, 360-degree render generated by GENA3D"></video>
+            <button class="g-flip" type="button" aria-pressed="false" aria-label="Flip Pouf between texture and geometry"></button>
+          </div>
+          <button class="g-input g-input--photo" type="button" data-zoom="static/img/inputs/in-fcfce69c55.webp" data-alt="Occluded input views of the pouf" aria-label="Enlarge the 1 view of input for Pouf">
+            <span class="g-input-k"><span>Input</span><span>1 view</span></span>
+            <span class="g-thumbs"><img src="static/img/inputs/in-e08e0474ef.webp" alt="" width="434" height="324" loading="lazy"></span>
+          </button>
+          <figcaption>Pouf</figcaption>
+        </figure>
+        <figure class="g-card">
+          <div class="g-media">
+            <video muted loop playsinline preload="none" poster="static/video/g/scene-table.jpg" data-src="static/video/g/scene-table.mp4" aria-label="Table, 360-degree render generated by GENA3D"></video>
+            <button class="g-flip" type="button" aria-pressed="false" aria-label="Flip Table between texture and geometry"></button>
+          </div>
+          <button class="g-input g-input--photo" type="button" data-zoom="static/img/inputs/in-fcfce69c55.webp" data-alt="Occluded input views of the table" aria-label="Enlarge the 1 view of input for Table">
+            <span class="g-input-k"><span>Input</span><span>1 view</span></span>
+            <span class="g-thumbs"><img src="static/img/inputs/in-e08e0474ef.webp" alt="" width="434" height="324" loading="lazy"></span>
+          </button>
+          <figcaption>Table</figcaption>
+        </figure>
+        <figure class="g-card">
+          <div class="g-media">
+            <video muted loop playsinline preload="none" poster="static/video/g/scene-sideboard.jpg" data-src="static/video/g/scene-sideboard.mp4" aria-label="Sideboard, 360-degree render generated by GENA3D"></video>
+            <button class="g-flip" type="button" aria-pressed="false" aria-label="Flip Sideboard between texture and geometry"></button>
+          </div>
+          <button class="g-input g-input--photo" type="button" data-zoom="static/img/inputs/in-5ea00c0149.webp" data-alt="Occluded input views of the sideboard" aria-label="Enlarge the 2 views of input for Sideboard">
+            <span class="g-input-k"><span>Input</span><span>2 views</span></span>
+            <span class="g-thumbs"><img src="static/img/inputs/in-59410d395e.webp" alt="" width="407" height="308" loading="lazy"><img src="static/img/inputs/in-3223c3ecc7.webp" alt="" width="407" height="308" loading="lazy"></span>
+          </button>
+          <figcaption>Sideboard</figcaption>
+        </figure>
+        <figure class="g-card">
+          <div class="g-media">
+            <video muted loop playsinline preload="none" poster="static/video/g/scene-coffee-table.jpg" data-src="static/video/g/scene-coffee-table.mp4" aria-label="Coffee table, 360-degree render generated by GENA3D"></video>
+            <button class="g-flip" type="button" aria-pressed="false" aria-label="Flip Coffee table between texture and geometry"></button>
+          </div>
+          <button class="g-input g-input--photo" type="button" data-zoom="static/img/inputs/in-5ea00c0149.webp" data-alt="Occluded input views of the coffee table" aria-label="Enlarge the 2 views of input for Coffee table">
+            <span class="g-input-k"><span>Input</span><span>2 views</span></span>
+            <span class="g-thumbs"><img src="static/img/inputs/in-59410d395e.webp" alt="" width="407" height="308" loading="lazy"><img src="static/img/inputs/in-3223c3ecc7.webp" alt="" width="407" height="308" loading="lazy"></span>
+          </button>
+          <figcaption>Coffee table</figcaption>
+        </figure>
+        <figure class="g-card">
+          <div class="g-media">
+            <video muted loop playsinline preload="none" poster="static/video/g/scene-chair.jpg" data-src="static/video/g/scene-chair.mp4" aria-label="Chair, 360-degree render generated by GENA3D"></video>
+            <button class="g-flip" type="button" aria-pressed="false" aria-label="Flip Chair between texture and geometry"></button>
+          </div>
+          <button class="g-input g-input--photo" type="button" data-zoom="static/img/inputs/in-df0721a2bc.webp" data-alt="Occluded input views of the chair" aria-label="Enlarge the 2 views of input for Chair">
+            <span class="g-input-k"><span>Input</span><span>2 views</span></span>
+            <span class="g-thumbs"><img src="static/img/inputs/in-8cdce68a6b.webp" alt="" width="382" height="308" loading="lazy"><img src="static/img/inputs/in-2602f29f30.webp" alt="" width="384" height="308" loading="lazy"></span>
+          </button>
+          <figcaption>Chair</figcaption>
+        </figure>
+        <figure class="g-card">
+          <div class="g-media">
+            <video muted loop playsinline preload="none" poster="static/video/g/scene-bed.jpg" data-src="static/video/g/scene-bed.mp4" aria-label="Bed, 360-degree render generated by GENA3D"></video>
+            <button class="g-flip" type="button" aria-pressed="false" aria-label="Flip Bed between texture and geometry"></button>
+          </div>
+          <button class="g-input g-input--photo" type="button" data-zoom="static/img/inputs/in-20cabd6858.webp" data-alt="Occluded input views of the bed" aria-label="Enlarge the 2 views of input for Bed">
+            <span class="g-input-k"><span>Input</span><span>2 views</span></span>
+            <span class="g-thumbs"><img src="static/img/inputs/in-a1488019b4.webp" alt="" width="436" height="326" loading="lazy"><img src="static/img/inputs/in-f17e7457cc.webp" alt="" width="436" height="326" loading="lazy"></span>
+          </button>
+          <figcaption>Bed</figcaption>
+        </figure>
+        <figure class="g-card">
+          <div class="g-media">
+            <video muted loop playsinline preload="none" poster="static/video/g/scene-wardrobe.jpg" data-src="static/video/g/scene-wardrobe.mp4" aria-label="Tall dresser, 360-degree render generated by GENA3D"></video>
+            <button class="g-flip" type="button" aria-pressed="false" aria-label="Flip Tall dresser between texture and geometry"></button>
+          </div>
+          <button class="g-input g-input--photo" type="button" data-zoom="static/img/inputs/in-20cabd6858.webp" data-alt="Occluded input views of the tall dresser" aria-label="Enlarge the 2 views of input for Tall dresser">
+            <span class="g-input-k"><span>Input</span><span>2 views</span></span>
+            <span class="g-thumbs"><img src="static/img/inputs/in-a1488019b4.webp" alt="" width="436" height="326" loading="lazy"><img src="static/img/inputs/in-f17e7457cc.webp" alt="" width="436" height="326" loading="lazy"></span>
+          </button>
+          <figcaption>Tall dresser</figcaption>
+        </figure>
+        <figure class="g-card">
+          <div class="g-media">
+            <video muted loop playsinline preload="none" poster="static/video/g/scene-dresser-left.jpg" data-src="static/video/g/scene-dresser-left.mp4" aria-label="Dresser, left, 360-degree render generated by GENA3D"></video>
+            <button class="g-flip" type="button" aria-pressed="false" aria-label="Flip Dresser, left between texture and geometry"></button>
+          </div>
+          <button class="g-input g-input--photo" type="button" data-zoom="static/img/inputs/in-20cabd6858.webp" data-alt="Occluded input views of the dresser, left" aria-label="Enlarge the 2 views of input for Dresser, left">
+            <span class="g-input-k"><span>Input</span><span>2 views</span></span>
+            <span class="g-thumbs"><img src="static/img/inputs/in-a1488019b4.webp" alt="" width="436" height="326" loading="lazy"><img src="static/img/inputs/in-f17e7457cc.webp" alt="" width="436" height="326" loading="lazy"></span>
+          </button>
+          <figcaption>Dresser, left</figcaption>
+        </figure>
+        <figure class="g-card">
+          <div class="g-media">
+            <video muted loop playsinline preload="none" poster="static/video/g/scene-dresser-right.jpg" data-src="static/video/g/scene-dresser-right.mp4" aria-label="Dresser, right, 360-degree render generated by GENA3D"></video>
+            <button class="g-flip" type="button" aria-pressed="false" aria-label="Flip Dresser, right between texture and geometry"></button>
+          </div>
+          <button class="g-input g-input--photo" type="button" data-zoom="static/img/inputs/in-20cabd6858.webp" data-alt="Occluded input views of the dresser, right" aria-label="Enlarge the 2 views of input for Dresser, right">
+            <span class="g-input-k"><span>Input</span><span>2 views</span></span>
+            <span class="g-thumbs"><img src="static/img/inputs/in-a1488019b4.webp" alt="" width="436" height="326" loading="lazy"><img src="static/img/inputs/in-f17e7457cc.webp" alt="" width="436" height="326" loading="lazy"></span>
+          </button>
+          <figcaption>Dresser, right</figcaption>
+        </figure>
+      </div>
+      </div>
+      <div class="tabpanel" role="tabpanel" id="gp-wild" aria-labelledby="gt-wild" hidden>
+      <div class="g-grid" data-mode="tex">
+        <figure class="g-card">
+          <div class="g-media">
+            <video muted loop playsinline preload="none" poster="static/video/g/wild-suv.jpg" data-src="static/video/g/wild-suv.mp4" aria-label="SUV, 360-degree render generated by GENA3D"></video>
+            <button class="g-flip" type="button" aria-pressed="false" aria-label="Flip SUV between texture and geometry"></button>
+          </div>
+          <button class="g-input g-input--photo" type="button" data-zoom="static/img/inputs/in-3a9c258c6d.webp" data-alt="Occluded input views of the suv" aria-label="Enlarge the 1 view of input for SUV">
+            <span class="g-input-k"><span>Input</span><span>1 view</span></span>
+            <span class="g-thumbs"><img src="static/img/inputs/in-51dbf5324a.webp" alt="" width="277" height="208" loading="lazy"></span>
+          </button>
+          <figcaption>SUV</figcaption>
+        </figure>
+        <figure class="g-card">
+          <div class="g-media">
+            <video muted loop playsinline preload="none" poster="static/video/g/wild-guitar.jpg" data-src="static/video/g/wild-guitar.mp4" aria-label="Guitar, 360-degree render generated by GENA3D"></video>
+            <button class="g-flip" type="button" aria-pressed="false" aria-label="Flip Guitar between texture and geometry"></button>
+          </div>
+          <button class="g-input g-input--photo" type="button" data-zoom="static/img/inputs/in-98a32727c7.webp" data-alt="Occluded input views of the guitar" aria-label="Enlarge the 2 views of input for Guitar">
+            <span class="g-input-k"><span>Input</span><span>2 views</span></span>
+            <span class="g-thumbs"><img src="static/img/inputs/in-4fed3326ac.webp" alt="" width="278" height="186" loading="lazy"><img src="static/img/inputs/in-8c50b6c5f3.webp" alt="" width="278" height="185" loading="lazy"></span>
+          </button>
+          <figcaption>Guitar</figcaption>
+        </figure>
+        <figure class="g-card">
+          <div class="g-media">
+            <video muted loop playsinline preload="none" poster="static/video/g/wild-plant.jpg" data-src="static/video/g/wild-plant.mp4" aria-label="Potted plant, 360-degree render generated by GENA3D"></video>
+            <button class="g-flip" type="button" aria-pressed="false" aria-label="Flip Potted plant between texture and geometry"></button>
+          </div>
+          <button class="g-input g-input--photo" type="button" data-zoom="static/img/inputs/in-85dfc56745.webp" data-alt="Occluded input views of the potted plant" aria-label="Enlarge the 4 views of input for Potted plant">
+            <span class="g-input-k"><span>Input</span><span>4 views</span></span>
+            <span class="g-thumbs"><img src="static/img/inputs/in-0f3d242bfb.webp" alt="" width="278" height="115" loading="lazy"><img src="static/img/inputs/in-09993b4051.webp" alt="" width="278" height="114" loading="lazy"><img src="static/img/inputs/in-8708d1649f.webp" alt="" width="278" height="115" loading="lazy"><img src="static/img/inputs/in-b34a04bede.webp" alt="" width="278" height="114" loading="lazy"></span>
+          </button>
+          <figcaption>Potted plant</figcaption>
+        </figure>
+        <figure class="g-card">
+          <div class="g-media">
+            <video muted loop playsinline preload="none" poster="static/video/g/wild-pot.jpg" data-src="static/video/g/wild-pot.mp4" aria-label="Pot, 360-degree render generated by GENA3D"></video>
+            <button class="g-flip" type="button" aria-pressed="false" aria-label="Flip Pot between texture and geometry"></button>
+          </div>
+          <button class="g-input g-input--photo" type="button" data-zoom="static/img/inputs/in-8227fd4bc1.webp" data-alt="Occluded input views of the pot" aria-label="Enlarge the 1 view of input for Pot">
+            <span class="g-input-k"><span>Input</span><span>1 view</span></span>
+            <span class="g-thumbs"><img src="static/img/inputs/in-85f49279fc.webp" alt="" width="276" height="208" loading="lazy"></span>
+          </button>
+          <figcaption>Pot</figcaption>
+        </figure>
+        <figure class="g-card">
+          <div class="g-media">
+            <video muted loop playsinline preload="none" poster="static/video/g/wild-teddy.jpg" data-src="static/video/g/wild-teddy.mp4" aria-label="Teddy bear, 360-degree render generated by GENA3D"></video>
+            <button class="g-flip" type="button" aria-pressed="false" aria-label="Flip Teddy bear between texture and geometry"></button>
+          </div>
+          <button class="g-input g-input--photo" type="button" data-zoom="static/img/inputs/in-be672b82aa.webp" data-alt="Occluded input views of the teddy bear" aria-label="Enlarge the 1 view of input for Teddy bear">
+            <span class="g-input-k"><span>Input</span><span>1 view</span></span>
+            <span class="g-thumbs"><img src="static/img/inputs/in-53727c41ea.webp" alt="" width="324" height="264" loading="lazy"></span>
+          </button>
+          <figcaption>Teddy bear</figcaption>
+        </figure>
+        <figure class="g-card">
+          <div class="g-media">
+            <video muted loop playsinline preload="none" poster="static/video/g/wild-goose.jpg" data-src="static/video/g/wild-goose.mp4" aria-label="Goose, 360-degree render generated by GENA3D"></video>
+            <button class="g-flip" type="button" aria-pressed="false" aria-label="Flip Goose between texture and geometry"></button>
+          </div>
+          <button class="g-input g-input--photo" type="button" data-zoom="static/img/inputs/in-e9874a1809.webp" data-alt="Occluded input views of the goose" aria-label="Enlarge the 1 view of input for Goose">
+            <span class="g-input-k"><span>Input</span><span>1 view</span></span>
+            <span class="g-thumbs"><img src="static/img/inputs/in-018d4c8d13.webp" alt="" width="323" height="199" loading="lazy"></span>
+          </button>
+          <figcaption>Goose</figcaption>
+        </figure>
+        <figure class="g-card">
+          <div class="g-media">
+            <video muted loop playsinline preload="none" poster="static/video/g/wild-banana.jpg" data-src="static/video/g/wild-banana.mp4" aria-label="Banana, 360-degree render generated by GENA3D"></video>
+            <button class="g-flip" type="button" aria-pressed="false" aria-label="Flip Banana between texture and geometry"></button>
+          </div>
+          <button class="g-input g-input--photo" type="button" data-zoom="static/img/inputs/in-d3a8a95297.webp" data-alt="Occluded input views of the banana" aria-label="Enlarge the 1 view of input for Banana">
+            <span class="g-input-k"><span>Input</span><span>1 view</span></span>
+            <span class="g-thumbs"><img src="static/img/inputs/in-5e5b0389c0.webp" alt="" width="324" height="215" loading="lazy"></span>
+          </button>
+          <figcaption>Banana</figcaption>
+        </figure>
+        <figure class="g-card">
+          <div class="g-media">
+            <video muted loop playsinline preload="none" poster="static/video/g/wild-armchair.jpg" data-src="static/video/g/wild-armchair.mp4" aria-label="Armchair, 360-degree render generated by GENA3D"></video>
+            <button class="g-flip" type="button" aria-pressed="false" aria-label="Flip Armchair between texture and geometry"></button>
+          </div>
+          <button class="g-input g-input--photo" type="button" data-zoom="static/img/inputs/in-e31ccc8102.webp" data-alt="Occluded input views of the armchair" aria-label="Enlarge the 2 views of input for Armchair">
+            <span class="g-input-k"><span>Input</span><span>2 views</span></span>
+            <span class="g-thumbs"><img src="static/img/inputs/in-2e65af4adc.webp" alt="" width="325" height="151" loading="lazy"><img src="static/img/inputs/in-d13f344e0c.webp" alt="" width="325" height="151" loading="lazy"></span>
+          </button>
+          <figcaption>Armchair</figcaption>
+        </figure>
+      </div>
+      </div>
+      <p class="g-hint">Videos load as you scroll and pause when out of view. Tap a render on touch screens to flip it.</p>
     </div>
+  </section>
 
-    <hr class="divider" />
-    <div class="container" style="max-width: 1200px;">
-        <div class="row">
-            <div class="col-sm-12">
-                <h2>BibTeX</h2>
-                <pre><code>
-                    @misc{zhou2026gena3dgenerativeamodal3d,
-                        title={GENA3D: Generative Amodal 3D Modeling by Bridging 2D Priors and 3D Coherence}, 
-                        author={Junwei Zhou and Yu-Wing Tai},
-                        year={2026},
-                        eprint={2511.21945},
-                        archivePrefix={arXiv},
-                        primaryClass={cs.CV},
-                        url={https://arxiv.org/abs/2511.21945}, 
-                  }
-                  </code></pre>
-            </div>
+  <!-- ═════════════ MORE RESULTS ═════════════ -->
+  <section class="section" id="more">
+    <div class="wrap">
+      <div class="sec-head">
+        <p class="sec-ref">§4.4 · Appendix B<span>Figures 6, 9, 10, B.1–B.5</span></p>
+        <div>
+          <h2 class="sec-title">In the wild, in the scene</h2>
+          <p class="sec-lead">Real captures from COCO (single view) and Mip-NeRF 360 (sparse views), and indoor scenes from Hypersim where many objects hide each other at once.</p>
         </div>
-    </div> 
-
-    <div class="container" style="max-width: 1200px;">
-        <footer>
-            <p> Website template from <a href="https://dreamfusion3d.github.io/">DreamFusion</a>. We thank the authors for the open-source code.</p>
-        </footer>
+      </div>
+      <div class="tabs" role="tablist" aria-label="More results" id="fig-tabs">
+        <button role="tab" id="ft-wild" aria-controls="fp-wild" aria-selected="true">In the wild</button>
+        <button role="tab" id="ft-scene" aria-controls="fp-scene" aria-selected="false" tabindex="-1">In the scene</button>
+        <button role="tab" id="ft-more" aria-controls="fp-more" aria-selected="false" tabindex="-1">More objects</button>
+        <button role="tab" id="ft-sam3d" aria-controls="fp-sam3d" aria-selected="false" tabindex="-1">vs. SAM 3D</button>
+        <button role="tab" id="ft-views" aria-controls="fp-views" aria-selected="false" tabindex="-1">GSO, 1/2/4 views</button>
+        <button role="tab" id="ft-gso" aria-controls="fp-gso" aria-selected="false" tabindex="-1">GSO gallery</button>
+        <button role="tab" id="ft-wild2" aria-controls="fp-wild2" aria-selected="false" tabindex="-1">More in the wild</button>
+        <button role="tab" id="ft-scene2" aria-controls="fp-scene2" aria-selected="false" tabindex="-1">More in the scene</button>
+      </div>
+      <div class="tabpanel" role="tabpanel" id="fp-wild" aria-labelledby="ft-wild">
+        <figure class="plate" style="margin-top:16px">
+          <button class="plate-img" type="button" data-zoom="static/img/in_the_wild.webp" aria-label="Enlarge Fig. 9">
+            <img src="static/img/in_the_wild.webp" alt="Kitchen, street, living room and counter photos with a boxed target object; Amodal3R and GENA3D results with normals for a pot, an SUV, a guitar and a potted plant." width="2041" height="1367" loading="lazy">
+            <span class="zoom" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="6"/><path d="m20 20-4.5-4.5M11 8v6M8 11h6"/></svg></span>
+          </button>
+          <figcaption><span class="fig-no">Fig. 9</span>In-the-wild amodal 3D generation. Single-view examples come from COCO, sparse-view examples from Mip-NeRF 360; Amodal3R is shown for comparison.</figcaption>
+        </figure>
+      </div>
+      <div class="tabpanel" role="tabpanel" id="fp-scene" aria-labelledby="ft-scene" hidden>
+        <figure class="plate" style="margin-top:16px">
+          <button class="plate-img" type="button" data-zoom="static/img/in_the_scene.webp" aria-label="Enlarge Fig. 10" style="max-width:880px;margin-inline:auto">
+            <img src="static/img/in_the_scene.webp" alt="Hypersim living rooms and a dining room; GENA3D, Amodal3R and SceneGen reconstructions with zoomed objects." width="1985" height="2045" loading="lazy">
+            <span class="zoom" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="6"/><path d="m20 20-4.5-4.5M11 8v6M8 11h6"/></svg></span>
+          </button>
+          <figcaption><span class="fig-no">Fig. 10</span>In-the-scene generation on Hypersim, compared with Amodal3R and SceneGen. Red and green icons mark different target objects.</figcaption>
+        </figure>
+      </div>
+      <div class="tabpanel" role="tabpanel" id="fp-more" aria-labelledby="ft-more" hidden>
+        <figure class="plate" style="margin-top:16px">
+          <button class="plate-img" type="button" data-zoom="static/img/more_results.webp" aria-label="Enlarge Fig. 6" style="max-width:880px;margin-inline:auto">
+            <img src="static/img/more_results.webp" alt="Additional GENA3D results next to their occluded inputs and 2D completions." width="1408" height="1296" loading="lazy">
+            <span class="zoom" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="6"/><path d="m20 20-4.5-4.5M11 8v6M8 11h6"/></svg></span>
+          </button>
+          <figcaption><span class="fig-no">Fig. 6</span>Additional results, shown with the occluded inputs after 2D amodal completion.</figcaption>
+        </figure>
+      </div>
+      <div class="tabpanel" role="tabpanel" id="fp-sam3d" aria-labelledby="ft-sam3d" hidden>
+        <figure class="plate" style="margin-top:16px">
+          <button class="plate-img" type="button" data-zoom="static/img/sam3d_comparison.webp" aria-label="Enlarge Fig. B.1">
+            <img src="static/img/sam3d_comparison.webp" alt="Side-by-side comparison of SAM 3D and GENA3D on several occluded objects." width="2037" height="829" loading="lazy">
+            <span class="zoom" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="6"/><path d="m20 20-4.5-4.5M11 8v6M8 11h6"/></svg></span>
+          </button>
+          <figcaption><span class="fig-no">Fig. B.1</span>More comparisons with SAM 3D.</figcaption>
+        </figure>
+      </div>
+      <div class="tabpanel" role="tabpanel" id="fp-views" aria-labelledby="ft-views" hidden>
+        <figure class="plate" style="margin-top:16px">
+          <button class="plate-img" type="button" data-zoom="static/img/supp_gso_comparison.webp" aria-label="Enlarge Fig. B.2" style="max-width:880px;margin-inline:auto">
+            <img src="static/img/supp_gso_comparison.webp" alt="Grid of GSO objects generated from 1, 2 and 4 views by TRELLIS, Amodal3R and GENA3D." width="1747" height="1899" loading="lazy">
+            <span class="zoom" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="6"/><path d="m20 20-4.5-4.5M11 8v6M8 11h6"/></svg></span>
+          </button>
+          <figcaption><span class="fig-no">Fig. B.2</span>More results with 1, 2 and 4 views on GSO, compared with TRELLIS and Amodal3R.</figcaption>
+        </figure>
+      </div>
+      <div class="tabpanel" role="tabpanel" id="fp-gso" aria-labelledby="ft-gso" hidden>
+        <figure class="plate" style="margin-top:16px">
+          <button class="plate-img" type="button" data-zoom="static/img/supp_gso_more.webp" aria-label="Enlarge Fig. B.3" style="max-width:880px;margin-inline:auto">
+            <img src="static/img/supp_gso_more.webp" alt="Grid of additional GSO objects generated by GENA3D." width="1541" height="2044" loading="lazy">
+            <span class="zoom" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="6"/><path d="m20 20-4.5-4.5M11 8v6M8 11h6"/></svg></span>
+          </button>
+          <figcaption><span class="fig-no">Fig. B.3</span>More objects generated by GENA3D on GSO.</figcaption>
+        </figure>
+      </div>
+      <div class="tabpanel" role="tabpanel" id="fp-wild2" aria-labelledby="ft-wild2" hidden>
+        <figure class="plate" style="margin-top:16px">
+          <button class="plate-img" type="button" data-zoom="static/img/supp_in_the_wild.webp" aria-label="Enlarge Fig. B.4" style="max-width:880px;margin-inline:auto">
+            <img src="static/img/supp_in_the_wild.webp" alt="Additional Mip-NeRF 360 scenes with GENA3D results." width="1579" height="2027" loading="lazy">
+            <span class="zoom" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="6"/><path d="m20 20-4.5-4.5M11 8v6M8 11h6"/></svg></span>
+          </button>
+          <figcaption><span class="fig-no">Fig. B.4</span>Additional in-the-wild results on Mip-NeRF 360.</figcaption>
+        </figure>
+      </div>
+      <div class="tabpanel" role="tabpanel" id="fp-scene2" aria-labelledby="ft-scene2" hidden>
+        <figure class="plate" style="margin-top:16px">
+          <button class="plate-img" type="button" data-zoom="static/img/supp_in_the_scene.webp" aria-label="Enlarge Fig. B.5" style="max-width:880px;margin-inline:auto">
+            <img src="static/img/supp_in_the_scene.webp" alt="Additional Hypersim scenes with GENA3D results." width="1542" height="2029" loading="lazy">
+            <span class="zoom" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="6"/><path d="m20 20-4.5-4.5M11 8v6M8 11h6"/></svg></span>
+          </button>
+          <figcaption><span class="fig-no">Fig. B.5</span>Additional in-the-scene results on Hypersim.</figcaption>
+        </figure>
+      </div>
     </div>
-    <script src="https://polyfill.io/v3/polyfill.js?features=IntersectionObserver"></script>
-    <script src="assets/js/yall.js"></script>
-    <script>
-        yall(
-            {
-                observeChanges: true
-            }
-        );
-    </script>
-    <script src="assets/js/scripts.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.0/js/bootstrap.bundle.min.js"></script>
-    <script src="https://uploads-ssl.webflow.com/51e0d73d83d06baa7a00000f/js/webflow.fd002feec.js"></script>
-    <!-- Import the component -->
+  </section>
+
+  <!-- ═════════════ ABLATIONS ═════════════ -->
+  <section class="section" id="ablations">
+    <div class="wrap">
+      <div class="sec-head">
+        <p class="sec-ref">§4.3 Ablation<span>Tables 3–5 · Figures 7, 8</span></p>
+        <div>
+          <h2 class="sec-title">Each piece earns its place</h2>
+          <p class="sec-lead">Removing either module hurts both image quality and geometry. Metrics improve or hold steady up to 20 input views, and the method works with different 2D amodal completion front-ends.</p>
+        </div>
+      </div>
+      <div class="tgrid">
+        <div class="panel">
+          <div class="tbl-wrap"><table class="t">
+            <caption><b>Table 3</b>Removing each module, 2 views.</caption>
+            <thead><tr><th class="l">Model</th><th>FID ↓</th><th>MMD (‰) ↓</th><th>COV (%) ↑</th></tr></thead>
+            <tbody><tr class="ours"><td class="l">Full model</td><td>32.12</td><td>5.50</td><td>39.08</td></tr><tr><td class="l">− Gating MLP</td><td>32.87</td><td>5.58</td><td>37.68</td></tr><tr><td class="l">− View-Wise CA</td><td>38.64</td><td>5.76</td><td>38.34</td></tr><tr><td class="l">− Stereo-Cond. CA</td><td>42.92</td><td>5.91</td><td>35.26</td></tr><tr><td class="l">− all proposed</td><td>46.23</td><td>5.94</td><td>34.42</td></tr></tbody>
+          </table></div>
+          <p class="note">Every removal hurts all three metrics. Stereo conditioning matters most, above all for geometry (MMD); view-wise fusion mostly helps render quality (FID).</p>
+        </div>
+        <div class="panel">
+          <div class="tbl-wrap"><table class="t">
+            <caption><b>Table 4</b>Number of input views, up to 20. Changes are relative to the row above.</caption>
+            <thead><tr><th class="l">Views</th><th>FID ↓</th><th>CLIP (%) ↑</th><th>MMD (‰) ↓</th></tr></thead>
+            <tbody><tr><td class="l">1</td><td>33.91</td><td>82.23</td><td>5.52</td></tr><tr><td class="l">2</td><td>32.12<span class="d up">−1.79</span></td><td>82.33<span class="d up">+0.10</span></td><td>5.50<span class="d up">−0.02</span></td></tr><tr><td class="l">4</td><td>30.73<span class="d up">−1.39</span></td><td>82.53<span class="d up">+0.20</span></td><td>5.48<span class="d up">−0.02</span></td></tr><tr><td class="l">10</td><td>29.56<span class="d up">−1.17</span></td><td>82.98<span class="d up">+0.45</span></td><td>5.45<span class="d up">−0.03</span></td></tr><tr><td class="l">20</td><td>29.43<span class="d up">−0.13</span></td><td>82.95<span class="d dn">−0.03</span></td><td>5.45<span class="d eq">±0.00</span></td></tr></tbody>
+          </table></div>
+          <p class="note">Quality improves or holds steady as views are added, so the model also handles semi-dense captures.</p>
+        </div>
+        <div class="panel">
+          <div class="tbl-wrap"><table class="t">
+            <caption><b>Table 5</b>Different 2D amodal completion front-ends, 2 views.</caption>
+            <thead><tr><th class="l">2D completion</th><th>FID ↓</th><th>CLIP (%) ↑</th><th>COV (%) ↑</th></tr></thead>
+            <tbody><tr><td class="l">pix2gestalt</td><td>38.61</td><td>82.07</td><td>37.26</td></tr><tr><td class="l">Flux inpainting</td><td class="second">33.07</td><td class="best">84.26</td><td class="best">39.49</td></tr><tr><td class="l">OAAC (default)</td><td class="best">32.12</td><td class="second">82.33</td><td class="second">39.08</td></tr></tbody>
+          </table></div>
+          <p class="note">Results stay close across front-ends, and stronger completion helps.</p>
+        </div>
+      </div>
+      <div class="figpair">
+        <figure class="plate">
+          <button class="plate-img" type="button" data-zoom="static/img/ablation.webp" aria-label="Enlarge Figure 8">
+            <img src="static/img/ablation.webp" alt="Ablation on a chair: sparse input, 2D amodal completion, TRELLIS, View-Wise only, Stereo-Conditioned only, and the full model." width="1451" height="599" loading="lazy">
+            <span class="zoom" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="6"/><path d="m20 20-4.5-4.5M11 8v6M8 11h6"/></svg></span>
+          </button>
+          <figcaption><span class="fig-no">Fig. 8</span>Visual ablation. Stereo conditioning keeps the structure faithful even when the 2D completions disagree or contain artifacts.</figcaption>
+        </figure>
+        <figure class="plate">
+          <button class="plate-img" type="button" data-zoom="static/img/mvs_errors.webp" aria-label="Enlarge Figure 7">
+            <img src="static/img/mvs_errors.webp" alt="Cactus pot and vase: misaligned and overlapping MVS point clouds, and the clean GENA3D results." width="820" height="986" loading="lazy">
+            <span class="zoom" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="6"/><path d="m20 20-4.5-4.5M11 8v6M8 11h6"/></svg></span>
+          </button>
+          <figcaption><span class="fig-no">Fig. 7</span>GENA3D tolerates misaligned or overlapping MVS point clouds.</figcaption>
+        </figure>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═════════════ BIBTEX ═════════════ -->
+  <section class="section" id="bibtex">
+    <div class="wrap">
+      <div class="sec-head">
+        <p class="sec-ref">Citation</p>
+        <div><h2 class="sec-title">BibTeX</h2></div>
+      </div>
+      <div class="bib">
+        <button type="button" class="btn btn--sm copy" id="copy-bib">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="11" height="11" rx="2"/><path d="M5 15V6a2 2 0 0 1 2-2h9"/></svg>
+          <span>Copy</span>
+        </button>
+<pre id="bib-text"><span class="k">@inproceedings</span>{zhou2026gena3d,
+  <span class="f">title</span>={GENA3D: Generative Amodal 3D Modeling by Bridging 2D Priors and 3D Coherence},
+  <span class="f">author</span>={Zhou, Junwei and Tai, Yu-Wing},
+  <span class="f">booktitle</span>={European Conference on Computer Vision},
+  <span class="f">pages</span>={318--337},
+  <span class="f">year</span>={2026},
+  <span class="f">organization</span>={Springer}
+}</pre>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="footer">
+  <div class="wrap footer-inner">
+    <span>Junwei Zhou &amp; Yu-Wing Tai · Dartmouth College · ECCV 2026</span>
+    <span><a href="https://arxiv.org/abs/2511.21945">arXiv</a> · <a href="https://github.com/Colezwhy/GENAmodal3D">GitHub</a> · <a href="#top">Back to top</a></span>
+  </div>
+</footer>
+
+<div class="lightbox" id="lightbox" hidden role="dialog" aria-modal="true" aria-label="Enlarged figure">
+  <button type="button" class="close" id="lb-close" aria-label="Close">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18"/></svg>
+  </button>
+  <div class="lightbox-inner"><img id="lb-img" alt=""></div>
+</div>
+
+<script src="static/js/main.js?v=b1f0bc07" defer></script>
 </body>
-
 </html>
